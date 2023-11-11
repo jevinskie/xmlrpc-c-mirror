@@ -66,6 +66,13 @@ ifeq ($(CXX_COMPILER_IBM),yes)
   CXXFLAGS_COMMON += -qrtti
 endif
 
+ifneq ($(OS),Windows_NT)
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Darwin)
+        CFLAGS_COMMON += -D_DARWIN_C_SOURCE
+    endif
+endif
+
 DISTDIR = $(BLDDIR)/$(PACKAGE)-$(VERSION)/$(SUBDIR)
 
 # MIN is the minor version number for shared libraries.
