@@ -15,6 +15,13 @@ include $(BLDDIR)/config.mk
 
 default: all
 
+ifneq ($(OS),Windows_NT)
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Darwin)
+        CFLAGS += -D_DARWIN_C_SOURCE
+    endif
+endif
+
 CFLAGS_ALL = $(CFLAGS_PERSONAL) $(CFLAGS) $(CADD)
 LDFLAGS_ALL = $(LDFLAGS_PERSONAL) $(LDFLAGS) $(LADD)
 

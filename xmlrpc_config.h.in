@@ -234,7 +234,11 @@
 #if MSVCRT
   #define XMLRPC_FINITE _finite
 #else
-  #define XMLRPC_FINITE finite
+  #ifndef __APPLE__
+    #define XMLRPC_FINITE finite
+  #else
+    #define XMLRPC_FINITE isfinite
+  #endif
 #endif
 
 
